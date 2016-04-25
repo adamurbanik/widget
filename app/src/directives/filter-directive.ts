@@ -4,7 +4,7 @@ function FilterDirective() {
     restrict: 'EA', 
     controller: FilterController,
     controllerAs: 'vm',
-    bindToController: 'true',
+    bindToController: true,
     scope: {
       widgetFilters: '=',
       test: '='
