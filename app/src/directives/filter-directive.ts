@@ -6,7 +6,7 @@ function FilterDirective() {
     controllerAs: 'vm',
     bindToController: true,
     scope: {
-      widgetFilters: '=',
+      mojekapcie: '=',
       test: '='
     },
     link

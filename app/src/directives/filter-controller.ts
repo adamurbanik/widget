@@ -1,10 +1,10 @@
 class FilterController {
   
-  private widgetFilters: Filter[];
+  private mojekapcie: Filter[];
   private test: string;
   constructor() {
     
-    console.log('filter', this.widgetFilters);
+    console.log('filter', this.mojekapcie);
     
   }
    
