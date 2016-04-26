@@ -1,20 +1,28 @@
 class WidgetController {
-  
+
   static $inject = ['filtersService'];
-  
-  private filtersService: FiltersService
-  
+
+  private filtersService: FiltersService;
   public filterProperties: string[];
+  private filters: Filter[];
   
-  constructor(FiltersService: FiltersService) {
-    this.filtersService = FiltersService;
+  constructor(filtersService: FiltersService) {
+
+    this.filtersService = filtersService;
+    this.filters = this.filtersService.getFilters();
     this.filterProperties = this.filtersService.getFilterProperties();
-   
+
+    this.filtersService.addItem('first filter');
+    this.filtersService.addItem('second filter');
+
   }
-  
+  selectFilter(filter: Filter) {
+    console.log(filter);
+  }
+
   addFilter() {}
   addCondition() {}
-  
+
 }
 
 

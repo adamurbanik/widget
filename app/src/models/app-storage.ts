@@ -3,7 +3,7 @@ class AppStorage {
   static $inject = ['localStorage'];
 
   private localStorage: LocalStorage;
-  private filters: Filter[];
+  private filters: Filter[] = [];
 
   constructor(localStorage: LocalStorage) {
     this.localStorage = localStorage;
@@ -18,6 +18,10 @@ class AppStorage {
   removeItem(index: number): Filter[] {
     this.filters.splice(index, 1);
     this.localStorage.updateStorage('filters', this.filters);
+    return this.filters;
+  }
+  
+  getFilters(): Filter[] {
     return this.filters;
   }
     

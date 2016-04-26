@@ -4,8 +4,7 @@ class FilterController {
   private properties: string[];
   
   constructor() {
-    console.log(this.properties);  
-    
+    console.log('filter controller', this.filters);
   }
    
 }

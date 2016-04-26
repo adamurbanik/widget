@@ -55,18 +55,33 @@ class Filter {
 
 class FiltersService {
 
-  private filterProperties: string[] = Filter.properties; 
+  static $inject = ['appStorage'];
 
-  
+  private appStorage: AppStorage;
+
+  private filterProperties: string[] = Filter.properties;
+
+  constructor(appStorage: AppStorage) {
+    this.appStorage = appStorage;
+  }
+
   getFilterProperties() {
     return this.filterProperties;
   }
 
-  createFilter() { }
+  createFilter(name: string) {
+    return new Filter(name);
+  }
 
-  addItem() { }
+  addItem(name: string) {
+    return this.appStorage.addItem(this.createFilter(name));
+  }
 
   removeItem() { }
+  
+  getFilters() {
+    return this.appStorage.getFilters();
+  }
 
 }
 
