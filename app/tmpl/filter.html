@@ -1,5 +1,40 @@
-<div id="square">
+<div class="square">
   <div ng-repeat="filter in vm.filters">
     <div>{{filter.name}}</div>
   </div>
+  <div ng-click="vm.addFilter()">
+    Add new filter
+  </div>
+</div>
+<div class="square">
+  <div class="header">
+    <div>{{filter.name}}</div>
+  </div>
+  <div class="firstPart">
+    <div>Filter name</div>
+    <div>My daily filter</div>
+  </div>
+  <div class="secondPart">
+    <div>Meet ALL the following conditions:</div>
+    <div ng-click="vm.addCondition()">Add condition</div>
+  </div>
+  <div class="footer">
+    <div>Save filter</div>
+    <div>Clone this filter</div>
+  </div>
+</div>
+<div class="square">
+  <div class="header">
+    <div>Filter technicians by</div>
+  </div>
+  <div class="search">Search properties</div>
+  <div ng-repeat="property in vm.properties">
+    {{property}}
+  </div>
+</div>
+<div class="square">
+  <div class="header">
+    <div>Filter technicians by</div>
+  </div>
+  <div>define property</div>
 </div>

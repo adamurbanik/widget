@@ -1,13 +1,19 @@
 class WidgetController {
   
-  public filters: Filter[] = [];
-  public test: string;
+  static $inject = ['filtersService'];
   
-  constructor() {
-    this.filters.push(new Filter('my default filter'));
-    this.test = "my test";
+  private filtersService: FiltersService
+  
+  public filterProperties: string[];
+  
+  constructor(FiltersService: FiltersService) {
+    this.filtersService = FiltersService;
+    this.filterProperties = this.filtersService.getFilterProperties();
+   
   }
   
+  addFilter() {}
+  addCondition() {}
   
 }
 

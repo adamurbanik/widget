@@ -6,18 +6,15 @@ function FilterDirective() {
     controllerAs: 'vm',
     bindToController: true,
     scope: {
-      mojekapcie: '=',
-      test: '='
-    },
-    link
+      filters: '=',
+      properties: '='
+    }
     
   }
   
 }
 
-function link(scope: ng.IScope) {
-  console.log(scope);
-}
+
 
 angular
   .module('widgetApp')
