@@ -1,18 +1,25 @@
-<div class="square">
+<div class="square" ng-if="vm.view === 1">
   <div ng-repeat="filter in vm.filters">
-    <div ng-click="vm.selectFilter(filter)">{{filter.name}}</div>
+    <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
+      <div class="filterLeftContent">
+        <div class="filterName">{{filter.name}}</div>
+      </div>
+      <span class="filterRightContent glyphicon glyphicon-chevron-right"></span>
+    </div>
   </div>
   <div ng-click="vm.addFilter()">
     Add new filter
   </div>
 </div>
-<div class="square">
+<div class="square" ng-if="vm.view === 2">
   <div class="header">
-    <div>{{filter.name}}</div>
+    <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
+    <div class="filterName">{{vm.currentFilter.name}}</div>
+    <div class="fa fa-share-alt fa-lg"></div>
   </div>
   <div class="firstPart">
     <div>Filter name</div>
-    <div>My daily filter</div>
+    <div>{{vm.currentFilter.name}}</div>
   </div>
   <div class="secondPart">
     <div>Meet ALL the following conditions:</div>
@@ -23,18 +30,20 @@
     <div>Clone this filter</div>
   </div>
 </div>
-<div class="square">
+<div class="square" ng-if="vm.view === 3">
   <div class="header">
-    <div>Filter technicians by</div>
+    <div class="text">Filter technicians by</div>
+    <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
   <div class="search">Search properties</div>
   <div ng-repeat="property in vm.properties">
-    {{property}}
+    <div ng-click="vm.chooseAttribut()">{{property}}</div>
   </div>
 </div>
-<div class="square">
+<div class="square" ng-if="vm.view === 4">
   <div class="header">
-    <div>Filter technicians by</div>
+    <div class="text">Filter technicians by</div>
+    <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
   <div>define property</div>
 </div>

@@ -1,5 +1,53 @@
 .square {
-	width: 380px;
+	width: 300px;
 	height: 600px;
   border: 1px solid black;
+}
+.header {
+  height: 50px;
+  background: #d9d9d9;  
+  position: relative;
+}
+.header .text {
+  padding-top: 15px;
+  padding-left: 10px;
+  float: left;
+  font-size: 18px;
+}
+.header .glyphicon-remove {
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 15px;
+  float: right;
+} 
+.header .glyphicon-arrow-left {
+  position: absolute;
+  top: 18px;
+  left: 10px;
+}
+.header .filterName {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 18px;  
+}
+.header .fa-share-alt {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+.selectFilterMenu {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+.filterLeftContent {
+  float: left;
+}
+.filterRightContent {
+  margin-left: 150px;
+}
+.filterName {
+  font-size: 20px;
+}
+.glyphicon-chevron-right {
+  margin-top: 5px;
 }
