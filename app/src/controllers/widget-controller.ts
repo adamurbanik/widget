@@ -16,7 +16,7 @@ class WidgetController {
     this.filtersService.addItem('second filter');
 
   }
- 
+ //
 
   addFilter() {}
   addCondition() {}
