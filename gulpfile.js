@@ -5,7 +5,8 @@ var gulp = require('gulp'),
  ts = require("gulp-typescript"),
  tslint = require('gulp-tslint'),
  tsProject = ts.createProject('tsconfig.json'),
- del = require('del');
+ del = require('del')
+ ;
 
 gulp.task('css', function() {
  gulp.src('./app/css/style.css')
@@ -19,7 +20,8 @@ gulp.task('css-vendor', function() {
  gulp
   .src([
    "./bower_components/bootstrap/dist/css/bootstrap.min.css",
-   "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
+   "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
+   "./bower_components/font-awesome/css/font-awesome.min.css"
   ])
   .pipe(concat('vendor.css'))
   .pipe(gulp.dest('./public/css'));
@@ -89,7 +91,7 @@ gulp.task('html', function() {
 gulp.task('fonts', function() {
  gulp.src([
    'bower_components/bootstrap/fonts/*',
-   './app/fonts/**/*'
+   'bower_components/font-awesome/fonts/fontawesome-webfont.*'
   ])
   .pipe(gulp.dest('public/fonts'));
 });

@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://gitlab.com/jaalinoe/ImagesProcessing/issues"
   },
-  "homepage": "https://gitlab.com/jaalinoe/ImagesProcessing#README"
+  "homepage": "https://gitlab.com/jaalinoe/ImagesProcessing#README",
+  "dependencies": {}
 }
