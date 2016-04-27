@@ -1,5 +1,6 @@
 class Filter {
 
+  private index: number;
   private name: string;
   private age: number;
   private skill: string;
@@ -8,10 +9,13 @@ class Filter {
   private spokenLanguages: string;
   private availability: string;
 
-  static properties: string[] = ['name', 'age', 'skill', 'degree', 'regionalTeam', 'spokenLanguages', 'availability'];
+  static properties: string[] = ['age', 'skill', 'degree', 'regionalTeam', 'spokenLanguages', 'availability'];
 
   constructor(name: string) {
     this.name = name;
+  }
+  getName(): string {
+    return this.name;
   }
 
   getAge(): number {
@@ -78,9 +82,22 @@ class FiltersService {
   }
 
   removeItem() { }
-  
+
   getFilters() {
     return this.appStorage.getFilters();
+  }
+
+  updateAttribute(name: string, property: string) {
+    let index = this.getIndexByFilterName(name);
+    
+  }
+  getIndexByFilterName(name: string) {
+    return this
+      .appStorage
+      .getFilters()
+      .map((filter) => filter.getName())
+      .indexOf(name);
+     
   }
 
 }

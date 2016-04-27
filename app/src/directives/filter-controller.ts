@@ -1,11 +1,17 @@
 class FilterController {
 
+  static $inject = ['filtersService'];
+
+  private filtersService: FiltersService;
+
   private filters: Filter[];
   private properties: string[];
   private view: number = 1;
   private currentFilter: Filter;
 
-  constructor() {
+  constructor(filtersService: FiltersService) {
+    this.filtersService = filtersService;
+    
     console.log('filter controller', this.filters);
   }
   moveForward() {
@@ -21,8 +27,9 @@ class FilterController {
     this.moveForward();
     this.currentFilter = filter;
   }
-  chooseAttribut() {
+  chooseAttribute(property: string) {
     this.moveForward();
+    this.filtersService.updateAttribute(this.currentFilter.getName(), property);
   }
   
 }

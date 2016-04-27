@@ -2,19 +2,20 @@
   <div ng-repeat="filter in vm.filters">
     <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
       <div class="filterLeftContent">
-        <div class="filterName">{{filter.name}}</div>
+        <div class="filterName fontSize18">{{filter.name}}</div>
       </div>
       <span class="filterRightContent glyphicon glyphicon-chevron-right"></span>
     </div>
+    <div class="lineBreak"></div>
   </div>
-  <div ng-click="vm.addFilter()">
-    Add new filter
+  <div class="btnAddFilter fontSize18" ng-click="vm.addFilter()">
+    Add Filter
   </div>
 </div>
 <div class="square" ng-if="vm.view === 2">
   <div class="header">
     <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
-    <div class="filterName">{{vm.currentFilter.name}}</div>
+    <div class="filterName fontSize18">{{vm.currentFilter.name}}</div>
     <div class="fa fa-share-alt fa-lg"></div>
   </div>
   <div class="firstPart">
@@ -37,7 +38,7 @@
   </div>
   <div class="search">Search properties</div>
   <div ng-repeat="property in vm.properties">
-    <div ng-click="vm.chooseAttribut()">{{property}}</div>
+    <div ng-click="vm.chooseAttribute(property)">{{property}}</div>
   </div>
 </div>
 <div class="square" ng-if="vm.view === 4">
