@@ -1,18 +1,31 @@
+enum STATE {
+  SCREEN1 = 1,
+  SCREEN2 = 2,
+  SCREEN3 = 3,
+  SCREEN4 = 4
+}
+
 class FilterController {
 
   static $inject = ['filtersService'];
 
+  public STATE = STATE;
+
   private filtersService: FiltersService;
 
   private filters: Filter[];
-  private properties: string[];
+  private conditions: any;
   private view: number = 1;
-  private currentFilter: Filter;
+  private selectedFilter: Filter;
+  private selectedCondition: any;
+
 
   constructor(filtersService: FiltersService) {
     this.filtersService = filtersService;
-    
-    console.log('filter controller', this.filters);
+
+    this.filters = this.filtersService.getFilters();
+    this.conditions = this.filtersService.getConditions();
+
   }
   moveForward() {
     this.view++;
@@ -23,15 +36,33 @@ class FilterController {
   addCondition() {
     this.moveForward();
   }
+  isState(val) {
+    return STATE[this.view] === val;
+  }
+  addNewFilter() {
+    this.moveForward();
+    this.selectedFilter = new Filter();
+  }
   selectFilter(filter: Filter) {
     this.moveForward();
-    this.currentFilter = filter;
+    this.selectedFilter = filter;
   }
-  chooseAttribute(property: string) {
+  chooseCondition(condition: any) {
     this.moveForward();
-    this.filtersService.updateAttribute(this.currentFilter.getName(), property);
+    this.selectedCondition = condition;
   }
-  
+  addConditionToFilter(selectedCondition: any, conditionValue: any) {
+    this.filters = this.filtersService.addConditionToFilter(selectedCondition, conditionValue, this.selectedFilter);
+  }
+  saveFilter(filterName) {
+    // check if this name exists. Some validation must be added
+    this.selectedFilter.filterName = filterName;
+    this.filters = this.filtersService.addFilter(this.selectedFilter);
+  }
+  showMeBloodyFilters() {
+    console.log(this.filters);
+  }
+
 }
 
 angular

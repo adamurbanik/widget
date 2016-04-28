@@ -1,10 +1,19 @@
 class AppStorage {
 
+  private localStorage: LocalStorage;
 
   private filters: Filter[] = [];
+  private conditions: any[] = [];
 
-  constructor() {}
-  
+  constructor(localStorage: LocalStorage) {
+    this.localStorage = localStorage;
+    this.filters = localStorage.getStorage();
+    this.conditions = localStorage.getConditions();
+
+
+
+  }
+
   addItem(filter: Filter): Filter[] {
     this.filters.push(filter);
     return this.filters;
@@ -16,12 +25,14 @@ class AppStorage {
   getFilters(): Filter[] {
     return this.filters;
   }
-  updateAttribute(filterName: string, property: string) {
-    
+  getConditions(): any[] {
+    return this.conditions;
   }
-  
 
-    
+
+
+
+
 }
 
 angular

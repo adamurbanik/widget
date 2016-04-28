@@ -1,59 +1,14 @@
+class Condition {}
+
 class Filter {
 
-  private index: number;
-  private name: string;
-  private age: number;
-  private skill: string;
-  private degree: string;
-  private regionalTeam: string;
-  private spokenLanguages: string;
-  private availability: string;
+  public filterName: string;
+  conditions: Condition[] = [];
 
-  static properties: string[] = ['age', 'skill', 'degree', 'regionalTeam', 'spokenLanguages', 'availability'];
-
-  constructor(name: string) {
-    this.name = name;
-  }
-  getName(): string {
-    return this.name;
+  addCondition(condition: Condition) {
+    this.conditions.push(condition);
   }
 
-  getAge(): number {
-    return this.age;
-  }
-  setAge(age: number) {
-    this.age = age;
-  }
-  getSkill(): string {
-    return this.skill;
-  }
-  setSkill(skill: string) {
-    return this.skill;
-  }
-  getDegree(): string {
-    return this.degree;
-  }
-  setDegree(degree: string) {
-    this.degree = degree;
-  }
-  getRegionalTeam(): string {
-    return this.regionalTeam;
-  }
-  setRegionalTeam(regionalTeam: string) {
-    this.regionalTeam = regionalTeam;
-  }
-  getSpokenLanguages(): string {
-    return this.spokenLanguages;
-  }
-  setSpokenLanguages(spokenLanguages: string) {
-    this.spokenLanguages = spokenLanguages;
-  }
-  getAvailability(): string {
-    return this.availability;
-  }
-  setAvailability(availability: string) {
-    this.availability = availability;
-  }
 
 }
 
@@ -63,25 +18,24 @@ class FiltersService {
 
   private appStorage: AppStorage;
 
-  private filterProperties: string[] = Filter.properties;
+  private conditions: any[];
 
   constructor(appStorage: AppStorage) {
     this.appStorage = appStorage;
+    this.conditions = this.appStorage.getConditions();
+
+  }
+  getConditions() {
+    return this.conditions;
   }
 
-  getFilterProperties() {
-    return this.filterProperties;
+  createFilter(name: string) { }
+
+  addFilter(filter: Filter): Filter[] {
+    return this.appStorage.addItem(filter);
   }
 
-  createFilter(name: string) {
-    return new Filter(name);
-  }
-
-  addItem(name: string) {
-    return this.appStorage.addItem(this.createFilter(name));
-  }
-
-  removeItem() { }
+  removeFilter() { }
 
   getFilters() {
     return this.appStorage.getFilters();
@@ -89,15 +43,26 @@ class FiltersService {
 
   updateAttribute(name: string, property: string) {
     let index = this.getIndexByFilterName(name);
-    
   }
+
   getIndexByFilterName(name: string) {
     return this
       .appStorage
       .getFilters()
-      .map((filter) => filter.getName())
+      .map((filter) => filter.filterName)
       .indexOf(name);
-     
+  }
+  getFilterByName(name: string) {
+    return this
+      .appStorage
+      .getFilters()
+      .filter((filter) => filter.filterName === name)[0];
+  }
+
+  addConditionToFilter(selectedCondition: any, conditionValue: any, selectedFilter: Filter) {
+    let filter = this.getFilterByName(selectedFilter.filterName);
+    filter.addCondition(selectedCondition);
+    // return this.appStorage.updateStorage(filter);
   }
 
 }

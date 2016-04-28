@@ -1,5 +1,5 @@
-<div class="square" ng-if="vm.view === 1">
-  <div ng-repeat="filter in vm.filters">
+<div class="square" ng-if="vm.isState('SCREEN1')">
+  <div ng-repeat="filter in vm.filters track by $index">
     <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
       <div class="filterLeftContent">
         <div class="filterName fontSize18">{{filter.name}}</div>
@@ -8,43 +8,47 @@
     </div>
     <div class="lineBreak"></div>
   </div>
-  <div class="btnAddFilter fontSize18" ng-click="vm.addFilter()">
+  <div class="btnAddFilter fontSize18" ng-click="vm.addNewFilter()">
     Add Filter
   </div>
 </div>
-<div class="square" ng-if="vm.view === 2">
+<div class="square" ng-if="vm.isState('SCREEN2')">
   <div class="header">
     <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
-    <div class="filterName fontSize18">{{vm.currentFilter.name}}</div>
+    <div class="filterName fontSize18">{{filterName || vm.selectedFilter.filterName}}</div>
     <div class="fa fa-share-alt fa-lg"></div>
   </div>
   <div class="firstPart">
     <div>Filter name</div>
-    <div>{{vm.currentFilter.name}}</div>
+    <input type="text" ng-model="filterName" name="conditionName" id="conditionName" placeholder="{{vm.selectedFilter.filterName}} " required>
   </div>
   <div class="secondPart">
     <div>Meet ALL the following conditions:</div>
     <div ng-click="vm.addCondition()">Add condition</div>
   </div>
   <div class="footer">
-    <div>Save filter</div>
+    <div ng-click="vm.saveFilter(filterName)">Save filter</div>
     <div>Clone this filter</div>
   </div>
 </div>
-<div class="square" ng-if="vm.view === 3">
+<div class="square" ng-if="vm.isState('SCREEN3')">
   <div class="header">
     <div class="text">Filter technicians by</div>
     <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
   <div class="search">Search properties</div>
-  <div ng-repeat="property in vm.properties">
-    <div ng-click="vm.chooseAttribute(property)">{{property}}</div>
+  <div ng-repeat="condition in vm.conditions">
+    <div ng-click="vm.chooseCondition(condition)">{{condition.name}}</div>
   </div>
 </div>
-<div class="square" ng-if="vm.view === 4">
+<div class="square" ng-if="vm.isState('SCREEN4')">
   <div class="header">
     <div class="text">Filter technicians by</div>
     <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
-  <div>define property</div>
+  <div>{{vm.selectedCondition.name}}</div>
+
+  <input type="text" ng-model="conditionValue" name="conditionName" id="conditionName" placeholder="Enter the {{vm.selectedCondition.name}}" required>
+  <div ng-click="vm.addConditionToFilter(vm.selectedCondition, conditionValue)">Add Condition</div>  
 </div>
+  <div ng-click="vm.showMeBloodyFilters()">show me my filters</div
