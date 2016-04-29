@@ -34,6 +34,8 @@ class LocalStorage {
       }
     ]
   }
+  
+  public returnData = {};
 
 
 
@@ -44,10 +46,16 @@ class LocalStorage {
   getStorage(): any {
     return [];
   }
-
-  updateStorage(storageName, data) {
-    localStorage.setItem(storageName, angular.toJson(data));
+  
+  updateStorage(filters: Filter[]) {
+    this.returnData = angular.toJson(filters);
+    console.log(this.returnData);
+    
   }
+
+  // updateStorage(storageName, data) {
+  //   localStorage.setItem(storageName, angular.toJson(data));
+  // }
 
 }
 
