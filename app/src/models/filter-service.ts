@@ -21,8 +21,6 @@ class Filter {
   removeCondition(condition: Condition) {
     let index = this.getIndexByStamp(condition.dateTime);
     this.conditions.splice(index, 1);
-    
-
   }
   getIndexByStamp(dateTime: Condition) {
     return this
@@ -32,7 +30,7 @@ class Filter {
       })
       .indexOf(dateTime);
   }
-  
+
 
 
 
@@ -90,13 +88,11 @@ class FiltersService {
     return (this.getFilterByName(name) !== void 0) ? true : false;
 
   }
-  saveFilter(name: string, filter: Filter) {
+  saveFilter(filter: Filter) {
 
-    let filterExists: boolean = filter.hasName();
-    filter.filterName = name;
+    let index = this.getIndexByFilterName(filter.filterName)
 
-    if (filterExists) {
-      let index = this.getIndexByFilterName(filter.filterName)
+    if (index !== -1) {
       this.appStorage.updateStorage(index, filter);
     }
     else {

@@ -20,14 +20,13 @@ class FilterController {
   private selectedCondition: any;
   private wrongInput: boolean = false;
 
-
   constructor(filtersService: FiltersService) {
     this.filtersService = filtersService;
 
     this.filters = this.filtersService.getFilters();
     this.conditions = this.filtersService.getConditions();
 
-    
+
   }
   moveForward() {
     this.view++;
@@ -35,7 +34,7 @@ class FilterController {
   }
   moveBackward() {
     this.view--;
-    this.reset();    
+    this.reset();
   }
   addCondition() {
     this.moveForward();
@@ -58,30 +57,36 @@ class FilterController {
   addConditionToFilter(selectedCondition: any, conditionValue: any) {
     selectedCondition.value = conditionValue;
     selectedCondition.dateTime = Date.now();
-    this.selectedFilter.addCondition(selectedCondition); 
+    this.selectedFilter.addCondition(selectedCondition);
     this.view = 2;
   }
   saveFilter(filterName: string) {
-    let validationFailed = (this.selectedFilter.hasName()) ? true: false;
-    
-    
-    
-    if(!this.filtersService.checkIfExists(filterName)) {
-      this.filtersService.saveFilter(filterName, this.selectedFilter);
-      this.wrongInput = false;
+
+    let valid = true;
+    this.wrongInput = false;
+
+    if (filterName !== undefined) {
+      valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
+      (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
+    }
+
+    if (valid && this.selectedFilter.hasName()) {
+      this.filtersService.saveFilter(this.selectedFilter);
     }
     else {
       this.wrongInput = true;
     }
+    
   }
+
   reset() {
     this.wrongInput = false;
   }
   deleteCondition(condition: Condition) {
     this.selectedFilter.removeCondition(condition);
   }
-  
-  
+
+
   showMeBloodyFilters() {
     console.log(this.filters);
   }
