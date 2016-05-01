@@ -1,3 +1,9 @@
+class ConditionsStorage {
+  public and: Condition[] = [];
+  public or: Condition[] = [];
+
+}
+
 class Condition {
 
   public dateTime;
@@ -7,7 +13,9 @@ class Condition {
 class Filter {
 
   public filterName: string;
-  public conditions: Condition[] = [];
+  public conditions: ConditionsStorage = new ConditionsStorage();
+
+  public state: string;
 
   constructor() {
     this.filterName = "";
@@ -16,19 +24,40 @@ class Filter {
     return this.filterName !== "";
   }
   addCondition(condition: Condition) {
-    this.conditions.push(condition);
+    (this.state === 'AND') ? this.conditions.and.push(condition) : this.conditions.or.push(condition);
   }
   removeCondition(condition: Condition) {
-    let index = this.getIndexByStamp(condition.dateTime);
-    this.conditions.splice(index, 1);
+    let indexStateObj = this.getIndexByStamp(condition.dateTime);
+    this.conditions[indexStateObj.state].splice(indexStateObj.index, 1);
+    
   }
   getIndexByStamp(dateTime: Condition) {
-    return this
+    let state: string = "";
+    let index = this
       .conditions
+      .and
       .map((condition) => {
         return condition.dateTime;
       })
       .indexOf(dateTime);
+      state = "AND";
+
+    if (index === -1) {
+      index = this
+        .conditions
+        .and
+        .map((condition) => {
+          return condition.dateTime;
+        })
+        .indexOf(dateTime);
+        state = "OR";
+    }
+    
+    return {
+      index,
+      state
+    } 
+
   }
 
 
@@ -56,7 +85,6 @@ class FiltersService {
   createFilter(name: string) { }
 
   addFilter(filter: Filter): Filter[] {
-    filter
     return this.appStorage.addItem(filter);
   }
 

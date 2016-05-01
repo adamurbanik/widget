@@ -34,7 +34,7 @@ class LocalStorage {
       }
     ]
   }
-  
+
   public returnData = {};
 
 
@@ -46,19 +46,53 @@ class LocalStorage {
   getStorage(): any {
     return [];
   }
-  
+
   updateStorage(filters: Filter[]) {
     this.returnData = angular.toJson(filters);
     console.log(this.returnData);
-    
-  }
+    // console.log(JSON.parse(this.returnData))
 
-  // updateStorage(storageName, data) {
-  //   localStorage.setItem(storageName, angular.toJson(data));
-  // }
+  }
 
 }
 
 angular
   .module('widgetApp')
   .service('localStorage', LocalStorage);
+
+
+
+
+[{
+  "conditions": {
+    "and": [
+      {
+        "name": "age",
+        "operators": [],
+        "mulitipleSelection": false,
+        "type:": "number",
+        "value": "19",
+        "dateTime": 1462107876783
+      },
+      {
+        "name": "priority",
+        "operators": ["equals", "notEquals", "lt", "gt"],
+        "mulitipleSelection": true,
+        "type:": "number",
+        "value": "very big priority",
+        "dateTime": 1462107912909
+      }],
+    "or": [
+      {
+        "name": "type",
+        "operators": ["equals", "notEquals"],
+        "mulitipleSelection": true,
+        "type:": "number",
+        "value": "computer science",
+        "dateTime": 1462107895062
+      }
+    ]
+  },
+  "filterName": "Adam",
+  "state": "AND"
+}]

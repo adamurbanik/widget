@@ -12,7 +12,7 @@ class AppStorage {
 
     this.filters = localStorage.getStorage();
     this.conditions = localStorage.getConditions();
-
+    console.log(this.conditions);
 
 
   }

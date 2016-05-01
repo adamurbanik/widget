@@ -36,7 +36,8 @@ class FilterController {
     this.view--;
     this.reset();
   }
-  addCondition() {
+  addCondition(type: string) {
+    this.selectedFilter.state = type;
     this.moveForward();
   }
   isState(val) {

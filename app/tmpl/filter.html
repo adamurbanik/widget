@@ -18,24 +18,32 @@
     <div class="filterName fontSize18">{{filterName || vm.selectedFilter.filterName}}</div>
     <div class="fa fa-share-alt fa-lg"></div>
   </div>
-  <form name="filterCreationForm" >
+  <form name="filterCreationForm">
     <div class="firstPart">
       <div>Filter name</div>
       <input type="text" ng-model="filterName" name="filterName" id="filterName" placeholder="{{vm.selectedFilter.filterName}} "
         required>
       <span ng-show="vm.wrongInput">Inappropriate value</span>
     </div>
-     <div class="lineBreak"></div>
+    <div class="lineBreak"></div>
     <div class="secondPart">
-      <div>Meet ALL the following conditions:</div>
-      <div ng-repeat="condition in vm.selectedFilter.conditions track by $index">
-        <div>{{condition.name}} is at least {{condition.value}}</div>
-         <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
+      <div>Meet ALL the following conditions:
+        <div ng-repeat="condition in vm.selectedFilter.conditions.and track by $index">
+          <div>{{condition.name}} is {{condition.value}}</div>
+          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
+        </div>
+        <button ng-click="vm.addCondition('AND')">Add condition</button>
       </div>
-      <button ng-click="vm.addCondition()">Add condition</button>
+      <div>Meet at least one of the following conditions:
+        <div ng-repeat="condition in vm.selectedFilter.conditions.or track by $index">
+          <div>{{condition.name}} is {{condition.value}}</div>
+          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>          
+        </div>
+        <button ng-click="vm.addCondition('OR')">Add condition</button>          
+      </div>
     </div>
     <div class="footer">
-      <button  type="button" ng-click="vm.saveFilter(filterName)">Save Filter</button>
+      <button type="button" ng-click="vm.saveFilter(filterName)">Save Filter</button>
       <div>Clone this filter</div>
     </div>
   </form>
