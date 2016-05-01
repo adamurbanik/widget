@@ -3,7 +3,7 @@ class AppStorage {
   static $inject = ['localStorage'];
 
   private filters: Filter[] = [];
-  private conditions: any[] = [];
+  private conditions: any[];
   private localStorage: LocalStorage;
   
   constructor(localStorage: LocalStorage) {

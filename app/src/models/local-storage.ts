@@ -1,6 +1,6 @@
 class LocalStorage {
 
-  public dummyData = {
+  public inputData = {
     "conditions": [
       {
         "name": "priority",
@@ -40,7 +40,7 @@ class LocalStorage {
 
 
   getConditions() {
-    return this.dummyData.conditions || [];
+    return this.inputData.conditions || [];
   }
 
   getStorage(): any {
@@ -50,8 +50,6 @@ class LocalStorage {
   updateStorage(filters: Filter[]) {
     this.returnData = angular.toJson(filters);
     console.log(this.returnData);
-    // console.log(JSON.parse(this.returnData))
-
   }
 
 }
@@ -67,32 +65,57 @@ angular
   "conditions": {
     "and": [
       {
-        "name": "age",
-        "operators": [],
-        "mulitipleSelection": false,
-        "type:": "number",
-        "value": "19",
-        "dateTime": 1462107876783
+        "property": "priority",
+        "operator": "equals",
+        "value": "very big priority",
+        "dateTime": 1462119438847
       },
       {
-        "name": "priority",
-        "operators": ["equals", "notEquals", "lt", "gt"],
-        "mulitipleSelection": true,
-        "type:": "number",
-        "value": "very big priority",
-        "dateTime": 1462107912909
-      }],
-    "or": [
+        "property": "type",
+        "operator": "equals",
+        "value": "some type",
+        "dateTime": 1462119451075
+      },
       {
-        "name": "type",
-        "operators": ["equals", "notEquals"],
-        "mulitipleSelection": true,
-        "type:": "number",
-        "value": "computer science",
-        "dateTime": 1462107895062
+        "property": "subject",
+        "operator": "doesContainWords",
+        "value": "mathematics",
+        "dateTime": 1462119460451
+      }
+    ],
+    "or":
+    [
+      {
+        "property": "age",
+        "value": "12",
+        "dateTime": 1462119466459
       }
     ]
   },
-  "filterName": "Adam",
-  "state": "AND"
-}]
+  "filterName": "adam",
+  "state": "OR"
+},
+  {
+    "conditions":
+    {
+      "and": [
+        {
+          "property": "priority",
+          "operator": "equals",
+          "value": "not a big prority",
+          "dateTime": 1462119496112
+        }
+      ],
+      "or": [
+        {
+          "property": "type",
+          "operator": "equals",
+          "value": "another type",
+          "dateTime": 1462119510903
+        }
+      ]
+    },
+    "filterName": "kasia",
+    "state": "OR"
+  }
+]

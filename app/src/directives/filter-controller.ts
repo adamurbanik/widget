@@ -19,13 +19,13 @@ class FilterController {
   private selectedFilter: Filter;
   private selectedCondition: any;
   private wrongInput: boolean = false;
+  private filterCondition: Condition;
 
   constructor(filtersService: FiltersService) {
     this.filtersService = filtersService;
 
     this.filters = this.filtersService.getFilters();
     this.conditions = this.filtersService.getConditions();
-
 
   }
   moveForward() {
@@ -53,12 +53,21 @@ class FilterController {
   }
   chooseCondition(condition: any) {
     this.moveForward();
+    this.filterCondition = new Condition();
+    this.filterCondition.property = condition.name;
+
     this.selectedCondition = condition;
+
   }
-  addConditionToFilter(selectedCondition: any, conditionValue: any) {
-    selectedCondition.value = conditionValue;
-    selectedCondition.dateTime = Date.now();
-    this.selectedFilter.addCondition(selectedCondition);
+  setConditionOperator(operator: string) {
+    this.filterCondition.operator = operator;
+
+  }
+  addConditionToFilter(conditionValue: any) {
+    this.filterCondition.value = conditionValue;
+    this.filterCondition.dateTime = Date.now();
+
+    this.selectedFilter.addCondition(this.filterCondition);
     this.view = 2;
   }
   saveFilter(filterName: string) {
@@ -77,7 +86,7 @@ class FilterController {
     else {
       this.wrongInput = true;
     }
-    
+
   }
 
   reset() {
@@ -86,6 +95,7 @@ class FilterController {
   deleteCondition(condition: Condition) {
     this.selectedFilter.removeCondition(condition);
   }
+
 
 
   showMeBloodyFilters() {

@@ -29,17 +29,17 @@
     <div class="secondPart">
       <div>Meet ALL the following conditions:
         <div ng-repeat="condition in vm.selectedFilter.conditions.and track by $index">
-          <div>{{condition.name}} is {{condition.value}}</div>
+          <div>{{condition.property}} is {{condition.value}}</div>
           <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
         </div>
         <button ng-click="vm.addCondition('AND')">Add condition</button>
       </div>
       <div>Meet at least one of the following conditions:
         <div ng-repeat="condition in vm.selectedFilter.conditions.or track by $index">
-          <div>{{condition.name}} is {{condition.value}}</div>
-          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>          
+          <div>{{condition.property}} {{condition.operator}} {{condition.value}}</div>
+          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
         </div>
-        <button ng-click="vm.addCondition('OR')">Add condition</button>          
+        <button ng-click="vm.addCondition('OR')">Add condition</button>
       </div>
     </div>
     <div class="footer">
@@ -65,9 +65,28 @@
   </div>
   <div>{{vm.selectedCondition.name}}</div>
 
+  <div class="btn-group display">
+    <button type="button" class="btn btn-default">
+        <div> Operator {{vm.filterCondition.operator}}</div>
+      </button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+    <ul class="dropdown-menu">
+      <li  ng-repeat="operator in vm.selectedCondition.operators track by $index" ng-click="vm.setConditionOperator(operator)"><a href="#">{{ ::operator }}</a></li>
+    </ul>
+  </div>
+
+
+
+
+
+
+
   <input type="text" ng-model="conditionValue" name="conditionName" id="conditionName" placeholder="Enter the {{vm.selectedCondition.name}}"
     required>
-  <button ng-click="vm.addConditionToFilter(vm.selectedCondition, conditionValue)">Add Condition</button>
+  <button ng-click="vm.addConditionToFilter(conditionValue)">Add Condition</button>
 </div>
 <div ng-click="vm.showMeBloodyFilters()">show me my filters
   </div

@@ -7,6 +7,10 @@ class ConditionsStorage {
 class Condition {
 
   public dateTime;
+  public property;
+  public value;
+  public operator;
+  
 
 }
 
@@ -27,7 +31,7 @@ class Filter {
     (this.state === 'AND') ? this.conditions.and.push(condition) : this.conditions.or.push(condition);
   }
   removeCondition(condition: Condition) {
-    let indexStateObj = this.getIndexByStamp(condition.dateTime);
+    let indexStateObj = this.getIndexByStamp(condition.dateTime);    
     this.conditions[indexStateObj.state].splice(indexStateObj.index, 1);
     
   }
@@ -40,17 +44,15 @@ class Filter {
         return condition.dateTime;
       })
       .indexOf(dateTime);
-      state = "AND";
+      state = 'and';
 
     if (index === -1) {
       index = this
         .conditions
         .and
-        .map((condition) => {
-          return condition.dateTime;
-        })
+        .map((condition) => condition.dateTime)
         .indexOf(dateTime);
-        state = "OR";
+        state = 'or';
     }
     
     return {
