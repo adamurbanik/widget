@@ -39,7 +39,7 @@ class LocalStorage {
 
 
 
-  getConditions() {
+  getProperties() {
     return this.inputData.conditions || [];
   }
 
@@ -57,65 +57,3 @@ class LocalStorage {
 angular
   .module('widgetApp')
   .service('localStorage', LocalStorage);
-
-
-
-
-[{
-  "conditions": {
-    "and": [
-      {
-        "property": "priority",
-        "operator": "equals",
-        "value": "very big priority",
-        "dateTime": 1462119438847
-      },
-      {
-        "property": "type",
-        "operator": "equals",
-        "value": "some type",
-        "dateTime": 1462119451075
-      },
-      {
-        "property": "subject",
-        "operator": "doesContainWords",
-        "value": "mathematics",
-        "dateTime": 1462119460451
-      }
-    ],
-    "or":
-    [
-      {
-        "property": "age",
-        "value": "12",
-        "dateTime": 1462119466459
-      }
-    ]
-  },
-  "filterName": "adam",
-  "state": "OR"
-},
-  {
-    "conditions":
-    {
-      "and": [
-        {
-          "property": "priority",
-          "operator": "equals",
-          "value": "not a big prority",
-          "dateTime": 1462119496112
-        }
-      ],
-      "or": [
-        {
-          "property": "type",
-          "operator": "equals",
-          "value": "another type",
-          "dateTime": 1462119510903
-        }
-      ]
-    },
-    "filterName": "kasia",
-    "state": "OR"
-  }
-]

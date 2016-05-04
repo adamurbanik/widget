@@ -2,17 +2,16 @@ class AppStorage {
 
   static $inject = ['localStorage'];
 
-  private filters: Filter[] = [];
-  private conditions: any[];
   private localStorage: LocalStorage;
+  private filters: Filter[];
+  private properties: any[];
   
   constructor(localStorage: LocalStorage) {
     
     this.localStorage = localStorage;
 
     this.filters = localStorage.getStorage();
-    this.conditions = localStorage.getConditions();
-    console.log(this.conditions);
+    this.properties = localStorage.getProperties();
 
 
   }
@@ -35,8 +34,8 @@ class AppStorage {
   getFilters(): Filter[] {
     return this.filters;
   }
-  getConditions(): any[] {
-    return this.conditions;
+  getProperties(): any[] {
+    return this.properties;
   }
 
 

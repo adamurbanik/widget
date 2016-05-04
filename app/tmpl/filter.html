@@ -1,21 +1,21 @@
-<div class="square" ng-if="vm.isState('SCREEN1')">
+<div class="square" ng-if="vm.isState('FILTERLIST')">
   <div ng-repeat="filter in vm.filters track by $index">
     <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
       <div class="filterLeftContent">
-        <div class="filterName fontSize18">{{filter.filterName}}</div>
+        <div class="filterName fontSizeLarge">{{filter.filterName}}</div>
       </div>
       <span class="filterRightContent glyphicon glyphicon-chevron-right"></span>
     </div>
     <div class="lineBreak"></div>
   </div>
-  <div class="btnAddFilter fontSize18" ng-click="vm.addNewFilter()">
+  <div class="btnAddFilter fontSizeLarge" ng-click="vm.addNewFilter()">
     Add Filter
   </div>
 </div>
-<div class="square" ng-if="vm.isState('SCREEN2')">
+<div class="square" ng-if="vm.isState('FILTERDETAILED')">
   <div class="header">
     <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
-    <div class="filterName fontSize18">{{filterName || vm.selectedFilter.filterName}}</div>
+    <div class="filterName fontSizeLarge">{{filterName || vm.selectedFilter.filterName}}</div>
     <div class="fa fa-share-alt fa-lg"></div>
   </div>
   <form name="filterCreationForm">
@@ -28,18 +28,18 @@
     <div class="lineBreak"></div>
     <div class="secondPart">
       <div>Meet ALL the following conditions:
-        <div ng-repeat="condition in vm.selectedFilter.conditions.and track by $index">
-          <div>{{condition.property}} is {{condition.value}}</div>
-          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
+        <div  condition 
+              selected-filter="vm.selectedFilter" 
+              move-forward="vm.moveForward()"
+              condition-type="'and'">
         </div>
-        <button ng-click="vm.addCondition('AND')">Add condition</button>
       </div>
       <div>Meet at least one of the following conditions:
-        <div ng-repeat="condition in vm.selectedFilter.conditions.or track by $index">
-          <div>{{condition.property}} {{condition.operator}} {{condition.value}}</div>
-          <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
+        <div  condition 
+              selected-filter="vm.selectedFilter" 
+              move-forward="vm.moveForward()"
+              condition-type="'or'">
         </div>
-        <button ng-click="vm.addCondition('OR')">Add condition</button>
       </div>
     </div>
     <div class="footer">
@@ -48,22 +48,22 @@
     </div>
   </form>
 </div>
-<div class="square" ng-if="vm.isState('SCREEN3')">
+<div class="square" ng-if="vm.isState('CONDITIONSELECTION')">
   <div class="header">
     <div class="text">Filter technicians by</div>
     <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
   <div class="search">Search properties</div>
-  <div ng-repeat="condition in vm.conditions">
-    <div ng-click="vm.chooseCondition(condition)">{{condition.name}}</div>
+  <div ng-repeat="property in vm.properties">
+    <div ng-click="vm.chooseCondition(property)">{{property.name}}</div>
   </div>
 </div>
-<div class="square" ng-if="vm.isState('SCREEN4')">
+<div class="square" ng-if="vm.isState('CONDITIONCONFIGURATION')">
   <div class="header">
     <div class="text">Filter technicians by</div>
     <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
-  <div>{{vm.selectedCondition.name}}</div>
+  <div>{{vm.selectedProperty.name}}</div>
 
   <div class="btn-group display">
     <button type="button" class="btn btn-default">
@@ -74,7 +74,7 @@
         <span class="sr-only">Toggle Dropdown</span>
       </button>
     <ul class="dropdown-menu">
-      <li  ng-repeat="operator in vm.selectedCondition.operators track by $index" ng-click="vm.setConditionOperator(operator)"><a href="#">{{ ::operator }}</a></li>
+      <li  ng-repeat="operator in vm.selectedProperty.operators track by $index" ng-click="vm.setConditionOperator(operator)"><a href="#">{{ ::operator }}</a></li>
     </ul>
   </div>
 

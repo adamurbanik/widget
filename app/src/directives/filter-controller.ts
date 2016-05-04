@@ -1,31 +1,31 @@
 enum STATE {
-  SCREEN1 = 1,
-  SCREEN2 = 2,
-  SCREEN3 = 3,
-  SCREEN4 = 4
+  FILTERLIST = 1,
+  FILTERDETAILED = 2,
+  CONDITIONSELECTION = 3,
+  CONDITIONCONFIGURATION = 4
 }
 
 class FilterController {
 
-  static $inject = ['filtersService'];
+  // static $inject = ['filtersService'];
 
   public STATE = STATE;
 
-  private filtersService: FiltersService;
+  // private filtersService: FiltersService;
 
   private filters: Filter[];
-  private conditions: any;
+  private properties: Property[];
   private view: number = 1;
   private selectedFilter: Filter;
-  private selectedCondition: any;
+  private selectedProperty: Property;
   private wrongInput: boolean = false;
   private filterCondition: Condition;
 
-  constructor(filtersService: FiltersService) {
-    this.filtersService = filtersService;
+  constructor() {
+    // this.filtersService = filtersService;
 
-    this.filters = this.filtersService.getFilters();
-    this.conditions = this.filtersService.getConditions();
+    // this.filters = this.filtersService.getFilters();
+    // this.properties = this.filtersService.getProperties();
 
   }
   moveForward() {
@@ -46,17 +46,18 @@ class FilterController {
   addNewFilter() {
     this.moveForward();
     this.selectedFilter = new Filter();
+    
   }
   selectFilter(filter: Filter) {
     this.moveForward();
     this.selectedFilter = filter;
   }
-  chooseCondition(condition: any) {
+  chooseCondition(property: Property) {
     this.moveForward();
     this.filterCondition = new Condition();
-    this.filterCondition.property = condition.name;
+    this.filterCondition.property = property.name;
 
-    this.selectedCondition = condition;
+    this.selectedProperty = property;
 
   }
   setConditionOperator(operator: string) {
@@ -92,9 +93,9 @@ class FilterController {
   reset() {
     this.wrongInput = false;
   }
-  deleteCondition(condition: Condition) {
-    this.selectedFilter.removeCondition(condition);
-  }
+  // deleteCondition(condition: Condition) {
+  //   this.selectedFilter.removeCondition(condition);
+  // }
 
 
 

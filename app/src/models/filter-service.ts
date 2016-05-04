@@ -1,3 +1,8 @@
+class Property {
+
+  name: string;
+
+}
 class ConditionsStorage {
   public and: Condition[] = [];
   public or: Condition[] = [];
@@ -10,7 +15,7 @@ class Condition {
   public property;
   public value;
   public operator;
-  
+
 
 }
 
@@ -28,37 +33,31 @@ class Filter {
     return this.filterName !== "";
   }
   addCondition(condition: Condition) {
-    (this.state === 'AND') ? this.conditions.and.push(condition) : this.conditions.or.push(condition);
+    (this.state === 'and') ? this.conditions.and.push(condition) : this.conditions.or.push(condition);
   }
   removeCondition(condition: Condition) {
-    let indexStateObj = this.getIndexByStamp(condition.dateTime);    
+    let indexStateObj = this.getIndexByStamp(condition.dateTime);
     this.conditions[indexStateObj.state].splice(indexStateObj.index, 1);
-    
+
   }
   getIndexByStamp(dateTime: Condition) {
     let state: string = "";
-    let index = this
-      .conditions
-      .and
-      .map((condition) => {
-        return condition.dateTime;
-      })
+    let index = this.conditions.and
+      .map(condition => condition.dateTime)
       .indexOf(dateTime);
-      state = 'and';
+    state = 'and';
 
     if (index === -1) {
-      index = this
-        .conditions
-        .and
-        .map((condition) => condition.dateTime)
+      index = this.conditions.and
+        .map(condition => condition.dateTime)
         .indexOf(dateTime);
-        state = 'or';
+      state = 'or';
     }
-    
+
     return {
       index,
       state
-    } 
+    }
 
   }
 
@@ -73,15 +72,15 @@ class FiltersService {
 
   private appStorage: AppStorage;
 
-  public conditions: any[];
+  public properties: Property[];
 
   constructor(appStorage: AppStorage) {
     this.appStorage = appStorage;
-    this.conditions = this.appStorage.getConditions();
+    this.properties = this.appStorage.getProperties();
 
   }
-  getConditions() {
-    return this.conditions;
+  getProperties() {
+    return this.properties;
   }
 
   createFilter(name: string) { }
@@ -104,14 +103,14 @@ class FiltersService {
     return this
       .appStorage
       .getFilters()
-      .map((filter) => filter.filterName)
+      .map(filter => filter.filterName)
       .indexOf(name);
   }
   getFilterByName(name: string): Filter {
     return this
       .appStorage
       .getFilters()
-      .filter((filter) => filter.filterName === name)[0];
+      .filter(filter => filter.filterName === name)[0];
   }
 
   checkIfExists(name: string): boolean {

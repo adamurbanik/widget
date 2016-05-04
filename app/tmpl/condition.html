@@ -1,0 +1,7 @@
+<div>
+  <div ng-repeat="condition in vm.selectedFilter.conditions[vm.conditionType] track by $index">
+    <div>{{condition.property}} {{condition.operator}} {{condition.value}}</div>
+    <span class="glyphicon glyphicon-trash" ng-click="vm.deleteCondition(condition)"></span>
+  </div>
+  <button ng-click="vm.addCondition(vm.conditionType)">Add condition</button>
+<div>
