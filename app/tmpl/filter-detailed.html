@@ -1,0 +1,36 @@
+<div class="square" ng-if="vm.isState('FILTERDETAILED')">
+  <div class="header">
+    <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
+    <div class="filterName fontSizeLarge">{{filterName || vm.selectedFilter.filterName}}</div>
+    <div class="fa fa-share-alt fa-lg"></div>
+  </div>
+  <form name="filterCreationForm">
+    <div class="firstPart">
+      <div>Filter name</div>
+      <input type="text" ng-model="filterName" name="filterName" id="filterName" placeholder="{{vm.selectedFilter.filterName}} "
+        required>
+      <span ng-show="vm.wrongInput">Inappropriate value</span>
+    </div>
+    <div class="lineBreak"></div>
+    <div class="secondPart">
+      <div>Meet ALL the following conditions:
+        <div  condition 
+              selected-filter="vm.selectedFilter" 
+              move-forward="vm.moveForward()"
+              condition-type="'and'">
+        </div>
+      </div>
+      <div>Meet at least one of the following conditions:
+        <div  condition 
+              selected-filter="vm.selectedFilter" 
+              move-forward="vm.moveForward()"
+              condition-type="'or'">
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <button type="button" ng-click="vm.saveFilter(filterName)">Save Filter</button>
+      <div>Clone this filter</div>
+    </div>
+  </form>
+</div>

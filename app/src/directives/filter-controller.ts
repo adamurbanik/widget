@@ -7,25 +7,22 @@ enum STATE {
 
 class FilterController {
 
-  // static $inject = ['filtersService'];
+  static $inject = ['filtersService'];
 
   public STATE = STATE;
 
-  // private filtersService: FiltersService;
+  private filtersService: FiltersService;
 
   private filters: Filter[];
   private properties: Property[];
-  private view: number = 1;
+  public view: number = 1;
   private selectedFilter: Filter;
   private selectedProperty: Property;
-  private wrongInput: boolean = false;
+  private wrongInput: boolean = true;
   private filterCondition: Condition;
 
-  constructor() {
-    // this.filtersService = filtersService;
-
-    // this.filters = this.filtersService.getFilters();
-    // this.properties = this.filtersService.getProperties();
+  constructor(filtersService: FiltersService) {
+    this.filtersService = filtersService;
 
   }
   moveForward() {
@@ -41,12 +38,13 @@ class FilterController {
     this.moveForward();
   }
   isState(val) {
+    console.log(this.view);    
     return STATE[this.view] === val;
   }
   addNewFilter() {
     this.moveForward();
-    this.selectedFilter = new Filter();
-    
+    this.selectedFilter = new Filter();    
+    console.log(this.selectedFilter);
   }
   selectFilter(filter: Filter) {
     this.moveForward();
@@ -58,11 +56,9 @@ class FilterController {
     this.filterCondition.property = property.name;
 
     this.selectedProperty = property;
-
   }
   setConditionOperator(operator: string) {
     this.filterCondition.operator = operator;
-
   }
   addConditionToFilter(conditionValue: any) {
     this.filterCondition.value = conditionValue;
@@ -73,20 +69,20 @@ class FilterController {
   }
   saveFilter(filterName: string) {
 
-    let valid = true;
-    this.wrongInput = false;
+    // let valid = true;
+    // this.wrongInput = false;
 
-    if (filterName !== undefined) {
-      valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
-      (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
-    }
+    // if (filterName !== undefined) {
+    //   valid = (this.filtersService.checkIfExists(filterName, this.filters)) ? false : true;
+    //   (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
+    // }
 
-    if (valid && this.selectedFilter.hasName()) {
-      this.filtersService.saveFilter(this.selectedFilter);
-    }
-    else {
-      this.wrongInput = true;
-    }
+    // if (valid && this.selectedFilter.hasName()) {
+    //   this.filtersService.saveFilter(this.selectedFilter);
+    // }
+    // else {
+    //   this.wrongInput = true;
+    // }
 
   }
 

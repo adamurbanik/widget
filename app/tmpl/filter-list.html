@@ -1,0 +1,14 @@
+<div class="square" ng-if="vm.isState('FILTERLIST')">
+  <div ng-repeat="filter in vm.filters track by $index">
+    <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
+      <div class="filterLeftContent">
+        <div class="filterName fontSizeLarge">{{filter.filterName}}</div>
+      </div>
+      <span class="filterRightContent glyphicon glyphicon-chevron-right"></span>
+    </div>
+    <div class="lineBreak"></div>
+  </div>
+  <div class="btnAddFilter fontSizeLarge" ng-click="vm.addNewFilter()">
+    Add Filter
+  </div>
+</div>

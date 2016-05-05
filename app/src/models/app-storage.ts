@@ -40,6 +40,14 @@ class AppStorage {
 
 
 
+// <filter-widget fw-config="vm.filterConfig" fw-on-apply="vm.applyFilter(params)"></filter-widget>
+
+// fwOnApply({params: { /*  parametry jakie wygenerowal filter */}});
+
+// klienta kontroller
+// applyFilter(params) {
+//   params
+// }
 
 }
 

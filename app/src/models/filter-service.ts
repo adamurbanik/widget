@@ -3,6 +3,7 @@ class Property {
   name: string;
 
 }
+
 class ConditionsStorage {
   public and: Condition[] = [];
   public or: Condition[] = [];
@@ -38,7 +39,6 @@ class Filter {
   removeCondition(condition: Condition) {
     let indexStateObj = this.getIndexByStamp(condition.dateTime);
     this.conditions[indexStateObj.state].splice(indexStateObj.index, 1);
-
   }
   getIndexByStamp(dateTime: Condition) {
     let state: string = "";
@@ -61,73 +61,26 @@ class Filter {
 
   }
 
-
-
-
 }
 
 class FiltersService {
 
-  static $inject = ['appStorage'];
-
-  private appStorage: AppStorage;
-
-  public properties: Property[];
-
-  constructor(appStorage: AppStorage) {
-    this.appStorage = appStorage;
-    this.properties = this.appStorage.getProperties();
-
-  }
-  getProperties() {
-    return this.properties;
-  }
-
-  createFilter(name: string) { }
-
-  addFilter(filter: Filter): Filter[] {
-    return this.appStorage.addItem(filter);
-  }
-
-  removeFilter() { }
-
-  getFilters() {
-    return this.appStorage.getFilters();
-  }
-
-  updateAttribute(name: string, property: string) {
-    let index = this.getIndexByFilterName(name);
-  }
-
-  getIndexByFilterName(name: string): number {
-    return this
-      .appStorage
-      .getFilters()
+  getIndexByFilterName(name: string, filters: Filter[]): number {
+    return filters
       .map(filter => filter.filterName)
       .indexOf(name);
   }
-  getFilterByName(name: string): Filter {
-    return this
-      .appStorage
-      .getFilters()
+  getFilterByName(name: string, filters: Filter[]): Filter {
+    return filters
       .filter(filter => filter.filterName === name)[0];
   }
-
-  checkIfExists(name: string): boolean {
-    return (this.getFilterByName(name) !== void 0) ? true : false;
-
+  checkIfExists(name: string, filters: Filter[]): boolean {
+    return (this.getFilterByName(name, filters) !== void 0); 
   }
-  saveFilter(filter: Filter) {
-
-    let index = this.getIndexByFilterName(filter.filterName)
-
-    if (index !== -1) {
-      this.appStorage.updateStorage(index, filter);
-    }
-    else {
-      this.appStorage.addItem(filter);
-    }
-  }
+  // saveFilter(filter: Filter) {
+  //   let index = this.getIndexByFilterName(filter.filterName);
+  //   (index !== -1) ? this.filters[index] = filter : this.filters[index] = filter;
+  // }
 
 
 }
