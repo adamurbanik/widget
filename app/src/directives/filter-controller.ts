@@ -11,20 +11,23 @@ class FilterController {
 
   public STATE = STATE;
 
-  private filtersService: FiltersService;
+  public filtersService: FiltersService;
 
-  private filters: Filter[];
-  private properties: Property[];
+  public filters: Filter[] = [];
+  public properties: Property[];
   public view: number = 1;
-  private selectedFilter: Filter;
-  private selectedProperty: Property;
-  private wrongInput: boolean = true;
-  private filterCondition: Condition;
+  public selectedFilter: Filter;
+  public selectedProperty: Property = new Property();
+  public wrongInput: boolean = true;
+  public filterCondition: Condition;
+  
+  public onApply: Function;
 
   constructor(filtersService: FiltersService) {
     this.filtersService = filtersService;
-
+    this.filtersService.setFilters(this.filters);
   }
+
   moveForward() {
     this.view++;
     this.reset();
@@ -38,13 +41,11 @@ class FilterController {
     this.moveForward();
   }
   isState(val) {
-    console.log(this.view);    
     return STATE[this.view] === val;
   }
   addNewFilter() {
     this.moveForward();
-    this.selectedFilter = new Filter();    
-    console.log(this.selectedFilter);
+    this.selectedFilter = new Filter();
   }
   selectFilter(filter: Filter) {
     this.moveForward();
@@ -54,7 +55,6 @@ class FilterController {
     this.moveForward();
     this.filterCondition = new Condition();
     this.filterCondition.property = property.name;
-
     this.selectedProperty = property;
   }
   setConditionOperator(operator: string) {
@@ -73,12 +73,13 @@ class FilterController {
     // this.wrongInput = false;
 
     // if (filterName !== undefined) {
-    //   valid = (this.filtersService.checkIfExists(filterName, this.filters)) ? false : true;
+    //   valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
     //   (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
     // }
 
     // if (valid && this.selectedFilter.hasName()) {
-    //   this.filtersService.saveFilter(this.selectedFilter);
+    //   this.filters = this.filtersService.saveFilter(this.selectedFilter);
+    //   // this.onApply(this.filters);
     // }
     // else {
     //   this.wrongInput = true;
@@ -89,9 +90,12 @@ class FilterController {
   reset() {
     this.wrongInput = false;
   }
-  // deleteCondition(condition: Condition) {
-  //   this.selectedFilter.removeCondition(condition);
-  // }
+
+
+
+  getFilterCondition() {
+    return this.filterCondition;
+  }
 
 
 

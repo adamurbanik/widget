@@ -1,17 +1,18 @@
 function FilterDirective() {
   return {
     templateUrl: 'tmpl/filter.html',
-    restrict: 'EA', 
+    restrict: 'EA',
     controller: FilterController,
     controllerAs: 'vm',
     bindToController: true,
     scope: {
-      filters: '=',
-      properties: '='
+      // filters: '=',
+      properties: '=',
+      onApply: '&'
     }
-    
+
   }
-  
+
 }
 
 

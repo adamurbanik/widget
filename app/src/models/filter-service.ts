@@ -1,27 +1,20 @@
 class Property {
-
   name: string;
-
 }
 
 class ConditionsStorage {
   public and: Condition[] = [];
   public or: Condition[] = [];
-
 }
 
 class Condition {
-
   public dateTime;
   public property;
   public value;
   public operator;
-
-
 }
 
 class Filter {
-
   public filterName: string;
   public conditions: ConditionsStorage = new ConditionsStorage();
 
@@ -65,22 +58,28 @@ class Filter {
 
 class FiltersService {
 
-  getIndexByFilterName(name: string, filters: Filter[]): number {
-    return filters
+  filters: Filter[];
+  
+  setFilters(filters: Filter[]) {
+    this.filters = filters;
+  }
+  getIndexByFilterName(name: string): number {
+    return this.filters
       .map(filter => filter.filterName)
       .indexOf(name);
   }
-  getFilterByName(name: string, filters: Filter[]): Filter {
-    return filters
+  getFilterByName(name: string): Filter {
+    return this.filters
       .filter(filter => filter.filterName === name)[0];
   }
-  checkIfExists(name: string, filters: Filter[]): boolean {
-    return (this.getFilterByName(name, filters) !== void 0); 
+  checkIfExists(name: string): boolean {
+    return (this.getFilterByName(name) !== void 0); 
   }
-  // saveFilter(filter: Filter) {
-  //   let index = this.getIndexByFilterName(filter.filterName);
-  //   (index !== -1) ? this.filters[index] = filter : this.filters[index] = filter;
-  // }
+  saveFilter(filter: Filter) {
+    let index = this.getIndexByFilterName(filter.filterName);
+    (index !== -1) ? this.filters[index] = filter : this.filters.push(filter);
+    return this.filters;
+  }
 
 
 }
@@ -88,3 +87,13 @@ class FiltersService {
 angular
   .module('widgetApp')
   .service('filtersService', FiltersService);
+  
+  
+  // <filter-widget fw-config="vm.filterConfig" fw-on-apply="vm.applyFilter(params)"></filter-widget>
+
+// fwOnApply({params: { /*  parametry jakie wygenerowal filter */}});
+
+// klienta kontroller
+// applyFilter(params) {
+//   params
+// }

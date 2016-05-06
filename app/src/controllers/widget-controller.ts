@@ -35,9 +35,9 @@ class WidgetController {
     ]
   }
 
-  private returnData = {};
-  private filters: Filter[];
-  private properties: Property[];
+  public returnData = {};
+  public filters: Filter[] = [];
+  public properties: Property[];
 
   constructor() {
     this.properties = this.getProperties();
@@ -45,7 +45,7 @@ class WidgetController {
   getProperties() {
     return this.inputData.conditions || [];
   }
-  updateStorage(filters: Filter[]) {
+  applyFilter(filters: Filter[]) {
     this.returnData = angular.toJson(filters);
     console.log(this.returnData);
   }

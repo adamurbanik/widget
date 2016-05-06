@@ -1,107 +1,23 @@
 <div ng-if="vm.isState('FILTERLIST')">
-  <div filter-list filters="vm.filters">
-  </div>
+  <div  filter-list></div>
 </div>
-
 
 <div ng-if="vm.isState('FILTERDETAILED')">
-  <div filter-detailed>
+  <div  filter-detailed
+        selected-filter="vm.selectedFilter"
+        move-backward="vm.moveBackward()"
+        move-forward="vm.moveForward()"
+        save-filter="vm.saveFilter(filterName)"
+        wrong-input="vm.wrongInput">
   </div>
 </div>
 
-<!--<div filter-condition-selection>
+<div ng-if="vm.isState('CONDITIONSELECTION')">
+  <div  filter-condition-selection></div>
 </div>
 
-<div filter-condition-configuration>
-</div>-->
+<div ng-if="vm.isState('CONDITIONCONFIGURATION')">
+  <div  filter-condition-configuration></div>
+</div>
 
-
-<!--<div class="square" ng-if="vm.isState('FILTERLIST')">
-  <div ng-repeat="filter in vm.filters track by $index">
-    <div class="selectFilterMenu" ng-click="vm.selectFilter(filter)">
-      <div class="filterLeftContent">
-        <div class="filterName fontSizeLarge">{{filter.filterName}}</div>
-      </div>
-      <span class="filterRightContent glyphicon glyphicon-chevron-right"></span>
-    </div>
-    <div class="lineBreak"></div>
-  </div>
-  <div class="btnAddFilter fontSizeLarge" ng-click="vm.addNewFilter()">
-    Add Filter
-  </div>
-</div>-->
-
-<!--<div class="square" ng-if="vm.isState('FILTERDETAILED')">
-  <div class="header">
-    <span class="glyphicon glyphicon-arrow-left" ng-click="vm.moveBackward()"></span>
-    <div class="filterName fontSizeLarge">{{filterName || vm.selectedFilter.filterName}}</div>
-    <div class="fa fa-share-alt fa-lg"></div>
-  </div>
-  <form name="filterCreationForm">
-    <div class="firstPart">
-      <div>Filter name</div>
-      <input type="text" ng-model="filterName" name="filterName" id="filterName" placeholder="{{vm.selectedFilter.filterName}} "
-        required>
-      <span ng-show="vm.wrongInput">Inappropriate value</span>
-    </div>
-    <div class="lineBreak"></div>
-    <div class="secondPart">
-      <div>Meet ALL the following conditions:
-        <div  condition 
-              selected-filter="vm.selectedFilter" 
-              move-forward="vm.moveForward()"
-              condition-type="'and'">
-        </div>
-      </div>
-      <div>Meet at least one of the following conditions:
-        <div  condition 
-              selected-filter="vm.selectedFilter" 
-              move-forward="vm.moveForward()"
-              condition-type="'or'">
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <button type="button" ng-click="vm.saveFilter(filterName)">Save Filter</button>
-      <div>Clone this filter</div>
-    </div>
-  </form>
-</div>-->
-
-<!--<div class="square" ng-if="vm.isState('CONDITIONSELECTION')">
-  <div class="header">
-    <div class="text">Filter technicians by</div>
-    <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
-  </div>
-  <div class="search">Search properties</div>
-  <div ng-repeat="property in vm.properties">
-    <div ng-click="vm.chooseCondition(property)">{{property.name}}</div>
-  </div>
-</div>-->
-
-<!--<div class="square" ng-if="vm.isState('CONDITIONCONFIGURATION')">
-  <div class="header">
-    <div class="text">Filter technicians by</div>
-    <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
-  </div>
-  <div>{{vm.selectedProperty.name}}</div>
-
-  <div class="btn-group display">
-    <button type="button" class="btn btn-default">
-        <div> Operator {{vm.filterCondition.operator}}</div>
-      </button>
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-    <ul class="dropdown-menu">
-      <li  ng-repeat="operator in vm.selectedProperty.operators track by $index" ng-click="vm.setConditionOperator(operator)"><a href="#">{{ ::operator }}</a></li>
-    </ul>
-  </div>
-  <input type="text" ng-model="conditionValue" name="conditionName" id="conditionName" placeholder="Enter the {{vm.selectedCondition.name}}"
-    required>
-  <button ng-click="vm.addConditionToFilter(conditionValue)">Add Condition</button>
-</div>-->
-
-<div ng-click="vm.showMeBloodyFilters()">show me my filters
-  </div
+<div ng-click="vm.showMeBloodyFilters()">show me my filters</div

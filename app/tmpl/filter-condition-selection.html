@@ -1,10 +1,10 @@
-<div class="square" ng-if="vm.isState('CONDITIONSELECTION')">
+<div class="square" >
   <div class="header">
     <div class="text">Filter technicians by</div>
     <span class="glyphicon glyphicon-remove" ng-click="vm.moveBackward()"></span>
   </div>
   <div class="search">Search properties</div>
-  <div ng-repeat="property in vm.properties">
+  <div ng-repeat="property in vm.properties track by $index">
     <div ng-click="vm.chooseCondition(property)">{{property.name}}</div>
   </div>
 </div>
