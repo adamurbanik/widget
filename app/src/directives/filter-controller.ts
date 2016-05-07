@@ -13,7 +13,7 @@ class FilterController {
 
   public filtersService: FiltersService;
 
-  public filters: Filter[] = [];
+  public filters: Filter[];
   public properties: Property[];
   public view: number = 1;
   public selectedFilter: Filter;
@@ -68,33 +68,24 @@ class FilterController {
     this.view = 2;
   }
   saveFilter(filterName: string) {
+    let valid = true;
+    this.wrongInput = false;
 
-    // let valid = true;
-    // this.wrongInput = false;
+    if (filterName !== undefined) {
+      valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
+      (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
+    }
 
-    // if (filterName !== undefined) {
-    //   valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
-    //   (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
-    // }
-
-    // if (valid && this.selectedFilter.hasName()) {
-    //   this.filters = this.filtersService.saveFilter(this.selectedFilter);
-    //   // this.onApply(this.filters);
-    // }
-    // else {
-    //   this.wrongInput = true;
-    // }
-
+    if (valid && this.selectedFilter.hasName()) {
+      this.filters = this.filtersService.saveFilter(this.selectedFilter);
+      this.onApply({filters: this.filters});
+    }
+    else {
+      this.wrongInput = true;
+    }
   }
-
   reset() {
     this.wrongInput = false;
-  }
-
-
-
-  getFilterCondition() {
-    return this.filterCondition;
   }
 
 
