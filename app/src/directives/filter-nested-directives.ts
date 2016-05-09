@@ -12,11 +12,11 @@ function FilterDetailedDirective() {
     restrict: 'EA',
     replace: true,
     scope: {
-      selectedFilter: '=',
+      selectedFilter: '<',
       moveBackward: '&',
       moveForward: '&',
       saveFilter: '&',
-      wrongInput: '='
+      wrongInput: '<'
     }
   }
 }

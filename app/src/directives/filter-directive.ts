@@ -6,8 +6,8 @@ function FilterDirective() {
     controllerAs: 'vm',
     bindToController: true,
     scope: {
-      filters: '<',
-      properties: '=',
+      // filters: '<',
+      properties: '<',
       onApply: '&'
     }
 

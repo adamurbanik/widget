@@ -7,9 +7,9 @@ function ConditionDirective() {
     controllerAs: 'vm',
     bindToController: true,
     scope: {
-      selectedFilter: '=',
+      selectedFilter: '<',
       moveForward: '&',
-      conditionType: '='
+      conditionType: '<'
     }
     
   }

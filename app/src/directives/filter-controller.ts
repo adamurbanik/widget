@@ -13,14 +13,14 @@ class FilterController {
 
   public filtersService: FiltersService;
 
-  public filters: Filter[];
+  public filters: Filter[] = [];
   public properties: Property[];
   public view: number = 1;
   public selectedFilter: Filter;
   public selectedProperty: Property = new Property();
   public wrongInput: boolean = true;
   public filterCondition: Condition;
-  
+
   public onApply: Function;
 
   constructor(filtersService: FiltersService) {
@@ -72,13 +72,20 @@ class FilterController {
     this.wrongInput = false;
 
     if (filterName !== undefined) {
-      valid = (this.filtersService.checkIfExists(filterName)) ? false : true;
-      (valid) ? this.selectedFilter.filterName = filterName : this.wrongInput = true;
+      valid = !this.filtersService.checkIfExists(filterName);
+
+      if (valid) {
+        this.selectedFilter.filterName = filterName;
+      }
+      else {
+        this.wrongInput = true;
+      }
+
     }
 
-    if (valid && this.selectedFilter.hasName()) {
+    if (valid && this.selectedFilter.filterName !== "") {
       this.filters = this.filtersService.saveFilter(this.selectedFilter);
-      this.onApply({filters: this.filters});
+      this.onApply({ filters: this.filters });
     }
     else {
       this.wrongInput = true;

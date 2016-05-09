@@ -119,6 +119,8 @@ class WidgetController {
   constructor() {
     this.properties = this.getProperties();
     this.filters = this.dummyFilters;
+    //this.filters = this.dummyFilters.map(filter => new Filter())
+    console.log(this.filters);
   }
   getProperties() {
     return this.inputData.conditions || [];

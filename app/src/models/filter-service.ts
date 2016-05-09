@@ -21,6 +21,7 @@ class Filter {
   public state: string;
 
   constructor() {
+    console.log('consteruktor filtreer')
     this.filterName = "";
   }
   hasName(): boolean {
@@ -29,7 +30,7 @@ class Filter {
   addCondition(condition: Condition) {
     (this.state === 'and') ? this.conditions.and.push(condition) : this.conditions.or.push(condition);
   }
-  removeCondition(condition: Condition) {
+  public removeCondition(condition: Condition) {
     let indexStateObj = this.getIndexByStamp(condition.dateTime);
     this.conditions[indexStateObj.state].splice(indexStateObj.index, 1);
   }
