@@ -21,7 +21,6 @@ class Filter {
   public state: string;
 
   constructor() {
-    console.log('consteruktor filtreer')
     this.filterName = "";
   }
   hasName(): boolean {

@@ -13,7 +13,7 @@ class FilterController {
 
   public filtersService: FiltersService;
 
-  public filters: Filter[] = [];
+  public filters: Filter[];
   public properties: Property[];
   public view: number = 1;
   public selectedFilter: Filter;
@@ -26,6 +26,7 @@ class FilterController {
   constructor(filtersService: FiltersService) {
     this.filtersService = filtersService;
     this.filtersService.setFilters(this.filters);
+    
   }
 
   moveForward() {
@@ -35,10 +36,6 @@ class FilterController {
   moveBackward() {
     this.view--;
     this.reset();
-  }
-  addCondition(type: string) {
-    this.selectedFilter.state = type;
-    this.moveForward();
   }
   isState(val) {
     return STATE[this.view] === val;

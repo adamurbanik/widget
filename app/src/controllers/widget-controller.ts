@@ -118,15 +118,28 @@ class WidgetController {
 
   constructor() {
     this.properties = this.getProperties();
-    this.filters = this.dummyFilters;
-    //this.filters = this.dummyFilters.map(filter => new Filter())
-    console.log(this.filters);
+
+    this.dummyFilters.forEach(dummyFilter => {
+      let filter: Filter = new Filter();
+      filter.filterName = dummyFilter.filterName;
+      
+      dummyFilter.conditions.and.forEach(property => {
+        let condition: any = property;
+        filter.addCondition(condition);
+      });
+      
+      dummyFilter.conditions.or.forEach(property => {
+        let condition: any = property;
+        filter.addCondition(condition);
+      })
+      
+      this.filters.push(filter);
+    })
   }
   getProperties() {
     return this.inputData.conditions || [];
   }
   applyFilter(filters: Filter[]) {
-    console.log(this.filters);
     this.returnData = angular.toJson(filters);
     console.log(this.returnData);
   }
